@@ -9,8 +9,10 @@
 
 <body>
     <nav class="light-blue lighten-1" role="navigation">
-        <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Sheet to \({ \rm \LaTeX
-                }\) table</a>
+        <div class="nav-wrapper container">
+            <a id="logo-container" href="#" class="brand-logo">Sheet to \({ \rm \LaTeX
+                }\) table <span style="font-size:medium;">Beta</span></a>
+            <!--
             <ul class="right hide-on-med-and-down">
                 <li><a href="#">Navbar Link</a></li>
             </ul>
@@ -19,6 +21,7 @@
                 <li><a href="#">Navbar Link</a></li>
             </ul>
             <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        -->
             <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
             <link href="css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection" />
             <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
@@ -29,50 +32,74 @@
     <div class="section no-pad-bot" id="index-banner">
         <div class="container">
             <br><br>
-            <h1 class="center ">Sheet to \({ \rm \LaTeX }\) table</h1>
+            <h1 class="center ">Sheet to \({ \rm \LaTeX }\) table <span style="font-size:large;">Beta</span></h1>
+            <p class="center">結構がばいです</p>
             <br><br><br><br>
             <div class="row">
                 <div class="col s12 m4">
                     <div class="switch">
                         <label>
-                            <input type="checkbox">
+                            <input type="checkbox" id="index-mode">
                             <span class="lever"></span>
                         </label>
                         数字(\( 0.00123 \))を指数表記(\( 1.23 \times 10^{-3} \))にする
                     </div>
                 </div>
-                <div class="col s12 m4">
+                <div class="col s12 m4 index-mode-format-div">
                     <div class="switch">
                         <label>
-                            <input type="checkbox">
+                            <input type="checkbox" id="index-mode-format">
                             <span class="lever"></span>
                         </label>
                         有効桁数を揃える
                     </div>
                 </div>
-                <div class="col m4 s12">
-                    <div class="row">
-                        <div class="col s3">
-                            <p>有効桁数: </p>
-                        </div>
-                        <div class="col s3 input-field ">
-                            <input id="last_name" type="text" class="validate">
-                            <label for="last_name"></label>
-                        </div>
+                <div class="col m4 s12 index-mode-number-div row">
+                    <div class="col s3">
+                        <p>有効桁数: </p>
+                    </div>
+                    <div class="col s3 input-field ">
+                        <input id="index-mode-number" type="text" class="validate">
+                        <label for="index-mode-number"></label>
                     </div>
                 </div>
-
-
             </div>
             <div class="row">
-                <div class="input-field col s12 m6">
-                    <textarea id="textarea2" class="materialize-textarea" data-length="120" rows="4"></textarea>
-                    <label for="textarea2">変換する表</label>
+                <div class="col s12 m4">
+                    <div class="switch">
+                        <label>
+                            <input type="checkbox" id="demical-point-format">
+                            <span class="lever"></span>
+                        </label>
+                        小数点で揃える(\usepackage{dcolumn})
+                    </div>
                 </div>
-                <div class="input-field col s12  m6">
-                    <textarea id="textarea2" class="materialize-textarea" data-length="120" rows="4"
-                        disabled>aaaa</textarea>
-                    <label for="textarea2">\({ \rm \LaTeX }変換後\)</label>
+            </div>
+            <br><br>
+            <div class="center">
+                <button class="btn waves-effect waves-light btn-flat" onclick="sheet2tex($('#inputTable').val());">
+                    <i class="material-icons left">sync</i>変換
+                </button>
+            </div>
+            <br>
+            <div class="row">
+                <div class="input-field col s12 m6">
+                    <textarea id="inputTable" class="materialize-textarea" data-length="120" rows="4"></textarea>
+                    <label for="inputTable">変換する表</label>
+                </div>
+                <div class="col s12 m6">
+                    <div class="input-field col s12">
+                        <textarea id="outputTable" class="materialize-textarea" data-length="120" rows="4" disabled>変換した内容がここに出ます
+                        </textarea>
+                        <label for="outputTable">\({ \rm \LaTeX }変換後\)</label>
+                    </div>
+                    <div class="row">
+                        <div class="col offset-s9 s3">
+                            <button class="btn waves-effect waves-light" onclick="copy('#outputTable');">
+                                <i class="material-icons left">content_paste</i>コピー
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
             <br><br>
@@ -81,84 +108,26 @@
     </div>
 
 
-    <div class="container">
-        <div class="section">
-
-            <!--   Icon Section   -->
-            <div class="row">
-                <div class="col s12 m4">
-                    <div class="icon-block">
-                        <h2 class="center light-blue-text"><i class="material-icons">flash_on</i></h2>
-                        <h5 class="center">Speeds up development</h5>
-
-                        <p class="light">We did most of the heavy lifting for you to provide a default stylings that
-                            incorporate our custom components. Additionally, we refined animations and transitions to
-                            provide a smoother experience for developers.</p>
-                    </div>
-                </div>
-
-                <div class="col s12 m4">
-                    <div class="icon-block">
-                        <h2 class="center light-blue-text"><i class="material-icons">group</i></h2>
-                        <h5 class="center">User Experience Focused</h5>
-
-                        <p class="light">By utilizing elements and principles of Material Design, we were able to create
-                            a framework that incorporates components and animations that provide more feedback to users.
-                            Additionally, a single underlying responsive system across all platforms allow for a more
-                            unified user experience.</p>
-                    </div>
-                </div>
-
-                <div class="col s12 m4">
-                    <div class="icon-block">
-                        <h2 class="center light-blue-text"><i class="material-icons">settings</i></h2>
-                        <h5 class="center">Easy to work with</h5>
-
-                        <p class="light">We have provided detailed documentation as well as specific code examples to
-                            help new users get started. We are also always open to feedback and can answer any questions
-                            a user may have about Materialize.</p>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-        <br><br>
-    </div>
 
     <footer class="page-footer orange">
         <div class="container">
             <div class="row">
                 <div class="col l6 s12">
-                    <h5 class="white-text">Company Bio</h5>
-                    <p class="grey-text text-lighten-4">We are a team of college students working on this project like
-                        it's our full time job. Any amount would help support and continue development on this project
-                        and is greatly appreciated.</p>
-
-
+                    <h5 class="white-text">偉大なる原案様</h5>
+                    <p class="grey-text text-lighten-4">ツールの原案です．本当にありがとうございます．</p>
                 </div>
-                <div class="col l3 s12">
-                    <h5 class="white-text">Settings</h5>
-                    <ul>
-                        <li><a class="white-text" href="#!">Link 1</a></li>
-                        <li><a class="white-text" href="#!">Link 2</a></li>
-                        <li><a class="white-text" href="#!">Link 3</a></li>
-                        <li><a class="white-text" href="#!">Link 4</a></li>
-                    </ul>
-                </div>
-                <div class="col l3 s12">
-                    <h5 class="white-text">Connect</h5>
-                    <ul>
-                        <li><a class="white-text" href="#!">Link 1</a></li>
-                        <li><a class="white-text" href="#!">Link 2</a></li>
-                        <li><a class="white-text" href="#!">Link 3</a></li>
-                        <li><a class="white-text" href="#!">Link 4</a></li>
-                    </ul>
+                <div class="col l6 s12">
+                    <h6 class="white-text">
+                        Excelの表をTeXの表に変換 - WEB PAGE OF KEISUKE KONDO</h6>
+                    <a class="white-text"
+                        href="http://keisukekondo.webcrow.jp/computer/tex/indexjp.html">http://keisukekondo.webcrow.jp/computer/tex/indexjp.html</a>
                 </div>
             </div>
         </div>
         <div class="footer-copyright">
             <div class="container">
-                Made by <a class="orange-text text-lighten-3" href="http://materializecss.com">Materialize</a>
+                Made by <a class="orange-text text-lighten-3" href="https://github.com/bonychops"
+                    target="_blank">Bony_Chops</a>
             </div>
         </div>
     </footer>
@@ -167,7 +136,7 @@
     <!--  Scripts-->
     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="js/materialize.js"></script>
-    <script src="js/init.js"></script>
+    <script src="js/sheet2tex.js"></script>
     <script>
        // M.textareaAutoResize($('#textarea1'));
     </script>
