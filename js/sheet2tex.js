@@ -5,6 +5,10 @@ $('#inputTable').change(function () {
 $('document').ready(function () {
     $('#outputTable').val('変換した内容がここに出ます\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n')
     updateOptions();
+    $('.modal-no-cancel').modal({
+        dismissible: false
+    });
+    $('.sidenav').sidenav();
 })
 
 $('input').change(function () {
