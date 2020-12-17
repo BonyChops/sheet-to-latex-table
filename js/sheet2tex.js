@@ -5,6 +5,7 @@ $('#inputTable').change(function () {
 $('document').ready(function () {
     $('#outputTable').val('変換した内容がここに出ます\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n')
     updateOptions();
+    $('.modal').modal();
     $('.modal-no-cancel').modal({
         dismissible: false
     });
@@ -13,6 +14,7 @@ $('document').ready(function () {
 
 $('input').change(function () {
     updateOptions();
+    sheet2tex($("#inputTable").val());
 });
 
 const updateOptions = () => {
@@ -32,15 +34,15 @@ const updateOptions = () => {
 const sheet2tex = (table) => {
     const tableSeparator = " \& ";
     const tableBreakSeparator = " \\\\\n";
-	var num_col = table.split("\n")[0].split("\t").length;
+    var num_col = table.split("\n")[0].split("\t").length;
     let str_col = [];
-	for (i = 0; i < num_col; ++i) {
-		str_col.push($('#demical-point-format').is(':checked') ? "D{.}{.}{9}" : "c");
-	}
-	str_col = str_col.join("|");
+    for (i = 0; i < num_col; ++i) {
+        str_col.push($('#demical-point-format').is(':checked') ? "D{.}{.}{9}" : "c");
+    }
+    str_col = str_col.join("|");
     const tableArray = table.split('\n')
         .map(col => col.split('\t').map(el => {
-            if(!$('#index-mode').is(':checked')){
+            if (!$('#index-mode').is(':checked')) {
                 return el;
             }
             if (isNaN(el) || el === '') {
@@ -61,7 +63,13 @@ const sheet2tex = (table) => {
     const tableHeader = "\\[ \\begin{array}" + "{" + String(str_col) + "}";
     const tableFooter = "\\end{array} \\]";
 
-    $('#outputTable').val(tableHeader + body + tableFooter);
+    $('#outputTable').val("\\begin{table} \\center \\caption{作成した表} " + tableHeader + body + tableFooter + " \\end{table}");
+    if (versionInfo.online) {
+        $('.table-preview').text(tableHeader + body + tableFooter);
+        MathJax.Hub.Typeset($(".table-preview")[0], function () { console.log("Done"); });
+    } else {
+        $('.table-preview').text("オフライン版ではプレビューはご利用いただけません...");
+    }
 }
 
 

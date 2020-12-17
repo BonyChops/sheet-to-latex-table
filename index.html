@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 
 <head>
     <meta charset="UTF-8">
@@ -10,29 +10,28 @@
 <body>
     <nav class="light-blue lighten-1" role="navigation">
         <div class="nav-wrapper container">
-            <a id="logo-container" href="#" class="brand-logo">Sheet to \({ \rm \LaTeX
-                }\) table <span style="font-size:medium;">Beta</span></a>
+            <a id="logo-container" href="#" class="brand-logo">Sheet to \({ \rm \LaTeX }\) table <span class="version-info" style="font-size:medium;"></span></a>
 
             <ul class="right hide-on-med-and-down">
-                <li><a onclick="downloadOffline();"><i class="left material-icons">download</i>オフライン版(Beta)</a></li>
+                <li class="offline-hide"><a onclick="downloadOffline();"><i class="left material-icons">download</i>オフライン版(Beta)</a></li>
+                <li><a href="https://github.com/BonyChops/sheet-to-latex-table" target="_blank">GitHub</a></li>
             </ul>
 
             <ul id="nav-mobile" class="sidenav">
-                <li><a onclick="downloadOffline();"><i class="left material-icons">download</i>オフライン版(Beta)</a></li>
+                <li class="offline-hide"><a onclick="downloadOffline();"><i class="left material-icons">download</i>オフライン版(Beta)</a></li>
+                <li><a href="https://github.com/BonyChops/sheet-to-latex-table" target="_blank">GitHub</a></li>
             </ul>
-            <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            <a href="#" data-target="nav-mobile" class="sidenav-trigger offline-hide"><i class="material-icons">menu</i></a>
 
             <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
             <link href="css/materialize.min.css" rel="stylesheet">
-            <script type="text/javascript"
-                src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
         </div>
     </nav>
     <div class="section no-pad-bot" id="index-banner">
         <div class="container">
             <br><br>
-            <h1 class="center ">Sheet to \({ \rm \LaTeX }\) table <span style="font-size:large;">Beta</span></h1>
-            <p class="center">結構がばいです</p>
+            <h1 class="center ">Sheet to \({ \rm \LaTeX }\) table <span class="version-info" style="font-size:large;">Beta</span></h1>
+            <p class="center">Excel, LibreOffice Calcから\({ \rm \LaTeX }\)へ</p>
             <br><br><br><br>
             <div class="row">
                 <div class="col s12 m4">
@@ -76,7 +75,7 @@
             </div>
             <br><br>
             <div class="center">
-                <button class="btn waves-effect waves-light btn-flat" onclick="sheet2tex($('#inputTable').val());">
+                <button class="btn waves-effect waves-light" onclick="sheet2tex($('#inputTable').val());">
                     <i class="material-icons left">sync</i>変換
                 </button>
             </div>
@@ -90,7 +89,7 @@
                     <div class="input-field col s12">
                         <textarea id="outputTable" class="materialize-textarea" data-length="120" rows="4" disabled>変換した内容がここに出ます
                         </textarea>
-                        <label for="outputTable">\({ \rm \LaTeX }変換後\)</label>
+                        <label for="outputTable">\({ \rm \LaTeX }\) 変換後</label>
                     </div>
                     <div class="row">
                         <div class="col offset-s9 s3">
@@ -101,17 +100,25 @@
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="s12">
+                    <p class="table-preview center"></p>
+                </div>
+            </div>
             <br><br>
 
         </div>
     </div>
 
-    <div id="loading" class="modal modal-no-cancel center">
+    <div id="loading" class="modal center">
         <div class="modal-content center">
-            <h4>お待ちください...</h4>
-            <p>ダウンロードする準備をしています...</p>
+            <h4 class="loading-title">お待ちください...</h4>
+            <p class="loading-mes">ダウンロードする準備をしています...</p>
         </div>
-        <div class="preloader-wrapper big active">
+        <div class="loading-loaded">
+            <h1><i class="material-icons large">download</i></h1>
+        </div>
+        <div class="preloader-wrapper big active loading-loader">
             <div class="spinner-layer spinner-blue-only">
                 <div class="circle-clipper left">
                     <div class="circle"></div>
@@ -124,9 +131,7 @@
                 </div>
             </div>
         </div>
-        <div class="modal-footer">
-            <a href="#!" class="modal-close waves-effect waves-green btn-flat">キャンセル</a>
-        </div>
+        <br><br><br>
     </div>
 
 
@@ -142,25 +147,27 @@
                 <div class="col l6 s12">
                     <h6 class="white-text">
                         Excelの表をTeXの表に変換 - WEB PAGE OF KEISUKE KONDO</h6>
-                    <a class="white-text"
-                        href="http://keisukekondo.webcrow.jp/computer/tex/indexjp.html">http://keisukekondo.webcrow.jp/computer/tex/indexjp.html</a>
+                    <a class="white-text" href="http://keisukekondo.webcrow.jp/computer/tex/indexjp.html" target="_blank">http://keisukekondo.webcrow.jp/computer/tex/indexjp.html</a>
                 </div>
             </div>
         </div>
         <div class="footer-copyright">
             <div class="container">
-                Made by <a class="orange-text text-lighten-3" href="https://github.com/bonychops"
-                    target="_blank">Bony_Chops</a>
+                Made by <a class="orange-text text-lighten-3" href="https://github.com/bonychops" target="_blank">Bony_Chops</a>
             </div>
         </div>
     </footer>
 
 
-    <!--  Scripts-->
+    <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <script src="js/materialize.js"></script>
+    <script src="js/materialize.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML" skip-download="true"></script>
+    <script src="js/ping.js"></script> <!--https://github.com/jdfreder/pingjs-->
+    <script src="js/init.js"></script>
     <script src="js/sheet2tex.js"></script>
-    <script src="js/offlineGenerator.js" skip-download></script>
+    <script src="js/offlineGenerator.js" skip-download="true" offline-replaced="true"></script>
+    <script src="js/functions.js"></script>
 
 </body>
 
